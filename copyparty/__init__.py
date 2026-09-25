@@ -108,6 +108,8 @@ web/rups.js
 web/shares.css
 web/shares.html
 web/shares.js
+web/mc.css
+web/mc.js
 web/splash.css
 web/splash.html
 web/splash.js
