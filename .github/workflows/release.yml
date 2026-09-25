@@ -21,6 +21,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # make-sfx.sh derives the version from `git describe --tags` and only
+      # accepts upstream-style tags. Drop our release tag from the local
+      # checkout so it falls back to copyparty/__version__.py.
+      - name: Hide the release tag from the version detection
+        if: startsWith(github.ref, 'refs/tags/')
+        run: git tag -d "$GITHUB_REF_NAME"
+
       - name: Build copyparty-sfx.py
         # dl-wd: fetch the prebuilt third-party web deps from the upstream
         # release instead of building them (they are not in git).
