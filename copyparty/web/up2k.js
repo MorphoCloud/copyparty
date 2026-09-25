@@ -1201,7 +1201,7 @@ function up2k_init(subtle) {
 
         var err = this.getAttribute('err');
         if (err)
-            return modal.alert('sorry, ' + err);
+            return modal.alert(err);
 
         toast.inf(0, L.u_scan);
 
@@ -1224,7 +1224,7 @@ function up2k_init(subtle) {
         else files = e.target.files;
 
         if (!files || !files.length)
-            return toast.err(0, 'no files selected??');
+            return toast.err(0, 'No files selected');
 
         more_one_file();
         var bad_files = [],
@@ -1596,7 +1596,7 @@ function up2k_init(subtle) {
             toast.warn(30, '<div id="actx_go">' + L.u_actx + '</div>');
             ebi('actx_go').onclick = function () {
                 start_actx();
-                toast.inf(3, 'thanks!');
+                toast.inf(3, 'Thank you');
             };
         }, 500);
     }
@@ -2267,7 +2267,7 @@ function up2k_init(subtle) {
                     return;
                 }
 
-                toast.err(0, 'y o u   b r o k e    i t\nfile: ' + esc(t.name + '') + '\nerror: ' + err);
+                toast.err(0, 'Upload error\nfile: ' + esc(t.name + '') + '\nerror: ' + err);
             };
             bpend = 1;
             tread = Date.now();
@@ -2431,7 +2431,7 @@ function up2k_init(subtle) {
             }
 
             if (k == "ferr")
-                return toast.err(0, 'y o u   b r o k e    i t\nfile: ' + esc(t.name + '') + '\nerror: ' + d[1]);
+                return toast.err(0, 'Upload error\nfile: ' + esc(t.name + '') + '\nerror: ' + d[1]);
 
             if (k == "read") {
                 reading--;
@@ -2685,7 +2685,7 @@ function up2k_init(subtle) {
                 for (var a = 0; a < missing.length; a++) {
                     var idx = t.hash.indexOf(missing[a]);
                     if (idx < 0)
-                        return modal.alert('wtf negative index for hash "{0}" in task:\n{1}'.format(
+                        return modal.alert('negative index for hash "{0}" in task:\n{1}'.format(
                             missing[a], esc(JSON.stringify(t))));
 
                     t.postlist.push(idx);

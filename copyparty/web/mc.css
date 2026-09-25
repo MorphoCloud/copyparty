@@ -1,0 +1,35 @@
+/* MorphoCloud: strip the UI to the essentials.
+   Page roots: #ht_spl = login/control panel, #ht_brw = file browser,
+   #ht_msg = message pages (e.g. wrong password). */
+
+/* ---- login page ---- */
+#ht_spl #a, #ht_spl #v, #ht_spl #b, #ht_spl #msg, #ht_spl #cc, #ht_spl .agr,
+#ht_spl h1#l, #ht_spl #f, #ht_spl #g, #ht_spl #aa, #ht_spl #ae, #ht_spl #repl, #ht_spl #pb {
+  display: none !important;
+}
+#ht_spl #wrap { max-width: 30em !important; margin: 5em auto 0 !important; }
+#ht_spl #lf::before {
+  content: "MorphoCloud upload";
+  display: block; font-size: 1.8em; margin-bottom: .2em;
+}
+#ht_spl #lf::after {
+  content: "Enter the passphrase from your instance email, then drop files or folders onto the page.";
+  display: block; margin-top: 1em; opacity: .75; line-height: 1.4;
+}
+#ht_spl #lp { width: 100%; box-sizing: border-box; font-size: 1.1em; margin: .6em 0; }
+#ht_spl #ls { font-size: 1.1em; }
+
+/* ---- message pages (wrong password, logged out) ---- */
+#ht_msg #box { max-width: 30em; margin: 5em auto 0; padding: 1em 1.5em; }
+#ht_msg #box h1 { font-size: 1.6em; font-weight: normal; }
+#ht_msg #box h2 { font-size: 1.1em; font-weight: normal; }
+
+/* ---- file browser ---- */
+#ht_brw #ops > a:not(#opa_up):not(#opa_mkd) { display: none !important; }
+#ht_brw #u2notbtn, #ht_brw #u2cards, #ht_brw #srv_info2 { display: none !important; }
+/* upload settings table (parallelism, turbo, etc.): the server sets the
+   defaults; mc.js keeps the drop button and ETA outside it */
+#ht_brw #u2conf { display: none !important; }
+#ht_brw #files th[name="lead"], #ht_brw #files td:first-child { display: none !important; }
+#ht_brw #u2btn { font-size: 1.3em; }
+#ht_brw #u2etaw { float: none !important; margin: .5em auto !important; }

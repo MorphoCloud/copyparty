@@ -1,0 +1,51 @@
+name: Release
+
+# Builds the single-file copyparty-sfx.py from this branch and attaches it
+# to a GitHub release. MorphoCloud instances download it from there
+# (exosphere ansible/roles/dropzone), sha256-pinned.
+#
+# Tag scheme: <upstream tag>-mc<n>, e.g. v1.20.24-mc1.
+
+on:
+  push:
+    tags:
+      - "v*-mc*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build copyparty-sfx.py
+        # dl-wd: fetch the prebuilt third-party web deps from the upstream
+        # release instead of building them (they are not in git).
+        run: ./scripts/make-sfx.sh dl-wd
+
+      - name: Smoke test
+        run: |
+          python3 dist/copyparty-sfx.py --version
+          grep -q "MorphoCloud upload" dist/copyparty-sfx.py || python3 dist/copyparty-sfx.py --version 2>&1 | grep -q sfxdir
+          sha256sum dist/copyparty-sfx.py | tee dist/copyparty-sfx.py.sha256
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: copyparty-sfx
+          path: |
+            dist/copyparty-sfx.py
+            dist/copyparty-sfx.py.sha256
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            --title "$GITHUB_REF_NAME" \
+            --notes "MorphoCloud build of copyparty ${GITHUB_REF_NAME%-mc*}. See MORPHOCLOUD.md for the patch set." \
+            dist/copyparty-sfx.py dist/copyparty-sfx.py.sha256

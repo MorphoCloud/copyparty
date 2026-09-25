@@ -1330,7 +1330,7 @@ class HttpCli(object):
         self,
         vpath: str,
         suf: str = "",
-        msg: str = "aight",
+        msg: str = "OK",
         flavor: str = "go to",
         click: bool = True,
         status: int = 200,
@@ -3694,7 +3694,7 @@ class HttpCli(object):
 
         dst = self.args.idp_logout or (self.args.SRS + "?h")
         h2 = '<a href="' + dst + '">continue</a>'
-        html = self.j2s("msg", h1="ok bye", h2=h2, redir=dst)
+        html = self.j2s("msg", h1="Logged out", h2=h2, redir=dst)
         self.reply(html.encode("utf-8"))
         return True
 
@@ -3725,7 +3725,7 @@ class HttpCli(object):
                 self.log("invalid password: %r" % (logpwd,), 3)
                 self.cbonk(self.conn.hsrv.gpwd, pwd, "pw", "invalid passwords")
 
-            msg = "naw dude"
+            msg = "Incorrect passphrase"
             pwd = "x"  # nosec
             dur = 0
 
@@ -5864,7 +5864,7 @@ class HttpCli(object):
 
         if fmt in ["v", "t", "txt"]:
             if self.uname == "*":
-                txt = "howdy stranger (you're not logged in)"
+                txt = "not logged in"
             else:
                 txt = "welcome back {}".format(self.uname)
 

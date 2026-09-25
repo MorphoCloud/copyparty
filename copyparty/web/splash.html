@@ -9,6 +9,7 @@
 	<meta name="theme-color" content="#{{ tcolor }}">
 	<link rel="stylesheet" media="screen" href="{{ r }}/.cpr/w/splash.css?_={{ ts }}">
 	<link rel="stylesheet" media="screen" href="{{ r }}/.cpr/w/ui.css?_={{ ts }}">
+	<link rel="stylesheet" media="screen" href="{{ r }}/.cpr/w/mc.css?_={{ ts }}">
 {{ html_head }}
 </head>
 
@@ -19,7 +20,7 @@
 		<a id="v" href="{{ r }}/?hc" class="af">connect</a>
 
 			{%- if this.uname == '*' %}
-		<p id="b">howdy stranger &nbsp; <small>(you're not logged in)</small></p>
+		<p id="b">not logged in</p>
 			{%- else %}
 				{%- if this.args.idp_logout %}
 		<a id="c" href="{{ this.args.idp_logout }}" class="logout">logout</a>
@@ -227,6 +228,7 @@ document.getElementById('k').onclick = function () {
 <script nonce="{{ js_nonce }}" src="{{ r }}/.cpr/w/tl/{{ lang }}.js?_={{ ts }}"></script>
 {%- endif %}
 <script nonce="{{ js_nonce }}" src="{{ r }}/.cpr/w/splash.js?_={{ ts }}"></script>
+<script nonce="{{ js_nonce }}" src="{{ r }}/.cpr/w/mc.js?_={{ ts }}"></script>
 {%- if js %}
 <script nonce="{{ js_nonce }}" src="{{ js }}_={{ ts }}"></script>
 {%- endif %}
